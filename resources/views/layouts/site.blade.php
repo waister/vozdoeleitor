@@ -24,7 +24,7 @@
     <meta property="fb:app_id" content="1954643438141685" />
 
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/site.css?v=5') }}">
+    <link rel="stylesheet" href="{{ asset('css/site.css?v=8') }}">
 
     <meta name="google-site-verification" content="D4syvxuxAvhI7dN-Xa7qTsXPwn2mCl2cBlSR6IdalFg" />
 

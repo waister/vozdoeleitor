@@ -11,5 +11,5 @@
 |
 */
 
-Route::get('/', 'HomeController@home')->name('home');
-Route::post('/register', 'HomeController@register')->name('register');
+Route::get('/{version?}', 'HomeController@home')->name('home');
+Route::post('/register/{version?}', 'HomeController@register')->name('register');

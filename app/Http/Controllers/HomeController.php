@@ -12,20 +12,29 @@ class HomeController extends Controller
     private $research;
     private $canVote;
 
-    public function __construct()
+    public function startup($v)
     {
-        $this->research = Research::where('status', 'active')->orderBy('created_at', 'desc')->first();
+        $cookieName = "AlreadyVoted{$v}";
 
-        if (isset($_COOKIE["AlreadyVoted"]) && $_COOKIE["AlreadyVoted"]) {
+        if (empty($v)) $v = 'v1';
+
+        $this->research = Research::where('status', 'active')
+            ->where('name', $v)
+            ->orderBy('created_at', 'desc')
+            ->first();
+
+        if (isset($_COOKIE[$cookieName]) && $_COOKIE[$cookieName]) {
             $this->canVote = false;
         } else {
             $this->canVote = Vote::where('research_id', $this->research->id)->where('ip', \Request::ip())->count() == 0;
         }
     }
 
-    public function home()
+    public function home($v = '')
     {
-        if (@$_SERVER['REQUEST_SCHEME'] == 'http')
+        $this->startup($v);
+
+        if (!config('app.debug') && @$_SERVER['REQUEST_SCHEME'] == 'http')
         {
             return redirect('https://vozdoeleitor.com/');
         }
@@ -35,8 +44,10 @@ class HomeController extends Controller
             ->with('canVote', $this->canVote);
     }
 
-    public function register(Request $request)
+    public function register(Request $request, $v = '')
     {
+        $this->startup($v);
+
         if ($this->canVote) {
             $researchId = $this->research->id;
 

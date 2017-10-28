@@ -1,8 +1,16 @@
 @extends('layouts.site')
 
 @section('content')
-<div id="voting" data-sound="{{ asset('/sounds/end.mp3') }}" data-register="{{ route('register') }}">
+<div id="voting" data-sound="{{ asset('/sounds/end.mp3') }}" data-register="{{ route('register', $research->name) }}">
     <h3 id="subtitle">{{ $research->title }}</h3>
+
+    <div id="version">
+        @if ($research->name == 'v1')
+            <a href="{{ route('home', 'v2') }}" class="v2">Vote na segunda rodada da enquete!!!</a>
+        @else
+            <a href="{{ route('home') }}" class="v1">Veja o resultado da primeira rodada!</a>
+        @endif
+    </div>
 
     <h2 class="separator">Apuração:</h2>
     <div id="result">
@@ -98,7 +106,7 @@
              data-ad-slot="9951255998"></ins>
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>    </div>
     <h2 class="separator" style="margin-top:80px">Comentários:</h2>
-    <div class="fb-comments" data-href="https://vozdoeleitor.com" data-numposts="100" data-width="100%"></div>
+    <div class="fb-comments" data-href="{{ Request::fullUrl() }}" data-numposts="100" data-width="100%"></div>
     <div id="ad-footer" class="ad-body">
         <script language="JavaScript1.1" src="https://t.dynad.net/script/?dc=5550002447;ord=1506692870765;idt_product=9;idt_url=325412;idt_label=84947;idt_category=16;click="></script>
     </div>

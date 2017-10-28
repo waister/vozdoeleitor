@@ -44,6 +44,30 @@ html, body {
     margin: 0;
 }
 
+#version {
+    margin-top: 26px;
+    text-align: center;
+}
+
+#version .v1, #version .v2 {
+    padding: 7px 25px;
+    color: white;
+    font-size: 22px;
+    text-decoration: none;
+
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    border-radius: 25px;
+}
+
+#version .v1 {
+    background: #34ab1f;
+}
+
+#version .v2 {
+    background: #ff5151;
+}
+
 #voting {
     position: relative;
 }
